@@ -27,6 +27,7 @@ const AddPostForm = () => {
         setContent('')
       }
     }
+    const canSave=Boolean(title) && Boolean(content) && Boolean(userId)
 
     const usersOptions =users.map(user=>(
       <option key={user.id} value={user.id}>
@@ -40,11 +41,18 @@ const AddPostForm = () => {
         <label htmlfor="postTitle">Post Title:</label>
         <input type="text" id="postTitle" name="postTitle" value={title} onChange={onTitleChanged}/>
 
-        <label htmlfor="postContent">Post Content:</label>
+          <label htmlFor="postAuthor">Author:</label>
+        <select type="text" name="postAuthor" value={userId} id="postAuthor" onChange={onAuthorChanged}>
+         <option value=""></option>
+         {usersOptions}
+          </select>
+
+        <label htmlFor="postContent">Post Content:</label>
         <textarea type="text" id="postContent" name="postContent" value={content} onChange={onContentChanged}/>
         <button  
         type="button"
         onClick={onSavePostClicked}
+        disabled={!canSave}
         >Save Post</button>
 
     </form>
