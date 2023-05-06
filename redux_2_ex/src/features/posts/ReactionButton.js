@@ -17,7 +17,7 @@ const ReactionButton = ({post}) => {
     const reactionButtons=Object.entries(reactionEmoji).map(([name,emoji])=>{
         return(
             <button 
-            key={name}
+            key={name.id}
             type="button"
             className='reactionButton'
             onClick={()=>

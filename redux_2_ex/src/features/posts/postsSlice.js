@@ -76,10 +76,10 @@ const postsSlice= createSlice({
             post.date =sub(new Date(), {minutes:min++}).toISOString()
             post.reactions={
                 thumbsUp:0,
-                hooray:0,
+                wow:0,
                 heart:0,
                 rocket:0,
-                eyes:0
+                coffee:0
             }
             return post
         });
@@ -95,10 +95,10 @@ const postsSlice= createSlice({
         action.payload.date=new Date().toISOString()
         action.payload.reaction={
             thumbsUp:0,
-            hooray:0,
+            wow:0,
             heart:0,
             rocket:0,
-            eyes:0
+            coffee:0
         }
         console.log(action.payload)
         state.posts.push(action.payload)
