@@ -1,15 +1,26 @@
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { decrement, increment } from './components/postSlice';
+import { decrement, increment,onSubmit } from './components/postSlice';
 
 function App() {
   const post=useSelector((state)=>state.post.value)
-  const Dispatch=useDispatch()
+  const todo=useSelector((state)=>state.post.todo)
+  const dispatch=useDispatch()
+
+  const handleSubmit=(e)=>({
+    e.preventDefault()
+
+  })
   return (
     <div className="App" style={{background:'black',color:'white',height:"100vh"}}>
-      <button type="button" onClick={()=>Dispatch(decrement())}>decrement</button>
+      <button type="button" onClick={()=>dispatch(decrement())}>decrement</button>
      <span>{post}</span>
-      <button type="button" onClick={()=>Dispatch(increment())}>increment</button>
+      <button type="button" onClick={()=>dispatch(increment())}>increment</button>
+      <form onSubmit={handleSubmit}>
+        <input type="input" onSubmit={()=>dispatch(onSubmit())} />
+        
+      </form>
+      <span>{todo}</span>
     </div>
   );
 }

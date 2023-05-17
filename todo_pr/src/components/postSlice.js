@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState={
     value:0,
+    todo:[]
 }
 
 export const postSlice = createSlice({
@@ -13,13 +14,18 @@ export const postSlice = createSlice({
         },
         decrement:(state)=>{
             state.value-=1;
+        },
+        onSubmit:(state,action)=>{
+         
+            state.todo.push(action.payload)
+
         }
 
       
     }
 })
 
-export const {increment,decrement}=postSlice.actions;
+export const {increment,decrement,onSubmit}=postSlice.actions;
 
 export default postSlice.reducer
 
