@@ -1,31 +1,33 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,nanoid } from "@reduxjs/toolkit";
 
-const initialState={
-    value:0,
-    todo:[]
-}
+const initialState=[
+    {id:'1',text:'this is text'},{id:'2',text:'this is text 2'}
+]
+
 
 export const postSlice = createSlice({
     name:'post',
     initialState,
     reducers:{
-        increment:(state)=>{
-            state.value+=1;
+       
+        postAdded:{
+            reducer(state,action){
+            state.push(action.payload)
+            },
+            prepare(text){
+                return{
+                    payload:{
+                        id:nanoid(),
+                        text
+                    }
+                }
+            },
         },
-        decrement:(state)=>{
-            state.value-=1;
-        },
-        onSubmit:(state,action)=>{
-         
-            state.todo.push(action.payload)
-
-        }
-
       
     }
 })
 
-export const {increment,decrement,onSubmit}=postSlice.actions;
+export const {postAdded}=postSlice.actions;
 
 export default postSlice.reducer
 

@@ -1,26 +1,32 @@
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { decrement, increment,onSubmit } from './components/postSlice';
+import { postAdded } from './components/postSlice';
+import { useState } from 'react';
 
 function App() {
-  const post=useSelector((state)=>state.post.value)
-  const todo=useSelector((state)=>state.post.todo)
+  const todo=useSelector((state)=>state.post)
   const dispatch=useDispatch()
 
-  const handleSubmit=(e)=>({
-    e.preventDefault()
-
+  const [text,setText]=useState('')
+  
+  const onSubmit=()=>({
+  if(text){
+    dispatch(postAdded(text))
+    setText('')
+  }
   })
+
+
+
   return (
     <div className="App" style={{background:'black',color:'white',height:"100vh"}}>
-      <button type="button" onClick={()=>dispatch(decrement())}>decrement</button>
-     <span>{post}</span>
-      <button type="button" onClick={()=>dispatch(increment())}>increment</button>
-      <form onSubmit={handleSubmit}>
-        <input type="input" onSubmit={()=>dispatch(onSubmit())} />
+    
+      <form >
+        <input type="text" value={text} onChange={(e)=>setText(e.target.value)} />
+        <button type="button" onClick={()=>dispatch(onSubmit())}>Save</button>
         
       </form>
-      <span>{todo}</span>
+      <span>{todo.map((todo=><p key={todo.id}>{todo.text}</p>))}</span>
     </div>
   );
 }
