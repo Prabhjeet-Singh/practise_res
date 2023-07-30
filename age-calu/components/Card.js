@@ -7,21 +7,40 @@ const Card = () => {
     month: 1,
     year: 2000,
   });
-  const [age,setAge]=useState(0);
-  const { day,month,year}=birthDate;
+  const [age, setAge] = useState({
+    ageDay:0,
+    ageMonth:0,
+    ageYear:0
+  });
+  const { day, month, year } = birthDate;
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    if (day < 1 || day > 31 || (month === 2 && day > 29) || ((month === 4 || month === 6 || month === 9 || month === 11) && day > 30)) {
+      alert('Invalid day selected!');
+      return;
+    }
+
     const today = new Date();
-    const birthDateValue = new Date(
-      birthDate.year,
-      birthDate.month - 1,
-      birthDate.day
-    );
+    const birthDateValue = new Date(year, month - 1, day);
 
     const diffTime = Math.abs(today - birthDateValue);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
     const ageYears = Math.floor(diffDays / 365);
-    setAge(ageYears);
+    const remainingDays = Math.floor(diffDays % 365);
+
+    const ageMonths = Math.floor(remainingDays / 30);
+    const ageDays = remainingDays % 30;
+
+    
+    setAge({
+      ageDay:ageDays,
+      ageMonth:ageMonths,
+      ageYear:ageYears
+    });
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,9 +50,8 @@ const Card = () => {
     }));
   };
 
-
   return (
-    <form onSubmit={handleSubmit} >
+    <form onSubmit={handleSubmit}>
       <input
         type="number"
         name="day"
@@ -55,7 +73,6 @@ const Card = () => {
         max="12"
         required
         className="text-black"
-
       />
       <span>Month</span>
       <input
@@ -67,16 +84,19 @@ const Card = () => {
         max="2022"
         required
         className="text-black"
-
       />
       <span>Year</span>
-      <button type="submit" >Click me</button>
+      <button type="submit">Click me</button>
       {/* <div className="text-white">
       <p>{day}</p>
       <p>{month}</p>
       <p>{year}</p>
       </div> */}
-      {age>0&&age}
+     {age.ageDay>0||age.ageMonth>0||age.ageYear>0?(<>
+      <p>{age.ageDay}</p>
+      <p>{age.ageMonth}</p>
+      <p>{age.ageYear}</p>
+      </>):0}
     </form>
   );
 };
