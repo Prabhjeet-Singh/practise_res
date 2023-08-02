@@ -51,7 +51,9 @@ const Card = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="bg-white border-1 min-w-[50rem] min-h-[25rem] rounded-t-[1rem]  rounded-bl-[1rem] rounded-br-[4rem] p-5">
+    <form onSubmit={handleSubmit}  className="">
+      <span className="text-gray-600 uppercase tracking-[5px] font-bold text-[1.5rem]" >day</span>
       <input
         type="number"
         name="day"
@@ -60,10 +62,10 @@ const Card = () => {
         min="0"
         max="31"
         required
-        className="text-black"
-      />
-      <span>day</span>
+        className="text-black "
+        />
 
+      <span className="text-gray-600 uppercase tracking-[5px] font-bold text-[1.5rem]">Month</span>
       <input
         type="number"
         name="month"
@@ -73,8 +75,8 @@ const Card = () => {
         max="12"
         required
         className="text-black"
-      />
-      <span>Month</span>
+        />
+      <span className="text-gray-600 uppercase tracking-[5px] font-bold text-[1.5rem]">Year</span>
       <input
         type="number"
         name="year"
@@ -85,19 +87,19 @@ const Card = () => {
         required
         className="text-black"
       />
-      <span>Year</span>
       <button type="submit">Click me</button>
       {/* <div className="text-white">
       <p>{day}</p>
       <p>{month}</p>
       <p>{year}</p>
       </div> */}
-     {age.ageDay>0||age.ageMonth>0||age.ageYear>0?(<>
-      <p>{age.ageDay}</p>
-      <p>{age.ageMonth}</p>
-      <p>{age.ageYear}</p>
-      </>):0}
     </form>
+     {age.ageDay>0||age.ageMonth>0||age.ageYear>0?(<>
+      <p className="">{age.ageDay}</p>
+      <p className="">{age.ageMonth}</p>
+      <p className="">{age.ageYear}</p>
+      </>):0}
+  </div>
   );
 };
 
